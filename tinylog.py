@@ -50,13 +50,16 @@ class Tinylog:
         pretty_printer = PrettyPrinter()
         pretty_str = prefix
         single_tuple = fmt.split("{}")
-        count = len(single_tuple)
-        if single_tuple[count - 1] != "":
-            count -= 1
+
+        args_len = len(args)
+        count = len(single_tuple) - 1
         for idx, val in enumerate(single_tuple):
-            if idx >= count:
+            if idx >= count or idx >= args_len:
                 break
             pretty_str += val + pretty_printer.pformat(args[idx])
-        print(pretty_str)
+        if count == 0:
+            print(pretty_str + fmt)
+        else:
+            print(pretty_str)
 
 tinylog = Tinylog()
