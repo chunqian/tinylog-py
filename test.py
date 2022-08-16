@@ -1,8 +1,9 @@
-# tinylog.py 
-tinylog.py is a dead simple, levelable, colorful logging library.
+"""---------------------------------------------------------
+    name: test.py
+    editor: shenchunqian
+    created: 2022-08-16
+---------------------------------------------------------"""
 
-## use 
-```python
 from tinylog import tinylog as log
 
 class Tiny():
@@ -21,17 +22,3 @@ if __name__ == '__main__':
     log.info("Say: {}, {}", "Hello", "Py!")
     log.error("Say: {}, {}", "Hello", "Py!")
     log.fatal("Say: {}, {}", "Hello", "Py!")
-```
-
-## output 
-```shell
-python test.py
-```
-```shell
-[INFO] Tiny __dict__: {'keys': [1, 2, 3, 4, 5, 6], 'name': 'tiny', 'number': 100}
-[DEBUG] Say: 'Hello', 'Py!'
-[WARN] Say: 'Hello', 'Py!'
-[INFO] Say: 'Hello', 'Py!'
-[ERROR] Say: 'Hello', 'Py!'
-[FATAL] Say: 'Hello', 'Py!'
-```
