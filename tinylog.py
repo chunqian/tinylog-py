@@ -48,6 +48,9 @@ class Tinylog:
 
     def print(self, prefix, *args):
         fmt = ""
+
+        if len(args) == 0:
+            return
         if type(args[0]) != str:
             for idx in range(len(args)):
                 fmt += "{}"
