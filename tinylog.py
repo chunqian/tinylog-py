@@ -5,6 +5,7 @@
 ---------------------------------------------------------"""
 
 import sys
+import re
 
 from pprint import PrettyPrinter
 
@@ -47,12 +48,16 @@ class Tinylog:
 
     def print(self, prefix, *args):
         fmt = ""
-        if len(args) >= 1 and type(args[0]) != str:
+        if type(args[0]) != str:
             for idx in range(len(args)):
                 fmt += "{}"
         else:
-            fmt = args[0]
-            args = args[1:len(args)]
+            if re.search("{}", args[0]) == None:
+                for idx in range(len(args)):
+                    fmt += "{}"
+            else:
+                fmt = args[0]
+                args = args[1:len(args)]
 
         pretty_printer = PrettyPrinter()
         pretty_str = prefix
