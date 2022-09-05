@@ -46,7 +46,7 @@ class Tinylog:
         self.print(prefix, *args)
         sys.exit()
 
-    def expand(self, *args):
+    def expandToFront(self, *args):
         fmt_str = ""
         args_list = [""]
         args_list.extend(args)
@@ -60,15 +60,31 @@ class Tinylog:
         args_list[0] = fmt_str
         return tuple(args_list)
 
+    def expandToEnd(self, *args):
+        count = 0
+        if type(args[0]) == str:
+            s = args[0].split("{}")
+            count = len(s) - 1
+
+        args_list = list(args)
+        diff_count = 0
+        if len(args_list) - 1 < count:
+            diff_count = count - (len(args_list) - 1)
+        for idx in range(diff_count):
+            args_list.append("not found!")
+        return tuple(args_list)
+
     def print(self, prefix, *args):
         top = len(args)
         if top == 0:
             return
         if type(args[0]) != str:
-            args = self.expand(*args)
+            args = self.expandToFront(*args)
         else:
             if re.search("{}", args[0]) == None:
-                args = self.expand(*args)
+                args = self.expandToFront(*args)
+            else:
+                args = self.expandToEnd(*args)
 
         fmt = args[0]
         top = len(args)
