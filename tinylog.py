@@ -6,6 +6,7 @@
 
 import sys
 import re
+import traceback
 
 from pprint import PrettyPrinter
 
@@ -45,6 +46,9 @@ class Tinylog:
             prefix = "[FATAL] "
         self.print(prefix, *args)
         sys.exit()
+
+    def stack(self):
+         traceback.print_stack()
 
     def expandToFront(self, *args):
         fmt_str = ""
